@@ -1,0 +1,14 @@
+name: openmm-nf
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - git
+  - python>=3.8
+  - docopt
+  - procps-ng
+  - openmm
+  - pdbfixer
+  - numpy
+  - matplotlib
