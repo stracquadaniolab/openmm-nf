@@ -3,7 +3,7 @@ nextflow.enable.dsl=2
 
 process openmm {
 
-    publishDir "${params.resultsDir}", pattern: "results.txt", mode: 'copy'
+    publishDir "${params.resultsDir}",  mode: 'copy'
 
     input:
         path inpdb
@@ -16,7 +16,8 @@ process openmm {
     output:
         path 'traj.pdb'
         path 'md_log.txt', emit: md_log
-
+    
+shell:
     """
         openmm.py $inpdb $temp $pres $solvmol $nptrun $nvtrun $reprate  traj.pdb md_log.txt
     """
@@ -27,8 +28,10 @@ process hydro_plot {
     input:
       path md_log
       val  skipsteps
+    
+    shell:
       """
-      python $md_log $skipsteps
+      plot.py $md_log $skipsteps
       """
 }
 
