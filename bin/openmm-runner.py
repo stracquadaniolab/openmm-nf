@@ -27,7 +27,7 @@ simulation.reporters.append(StateDataReporter(stdout, reprate, step=True,
 simulation.reporters.append(StateDataReporter(sys.argv[9], reprate, step=True,
         potentialEnergy=True, temperature=True, volume=True))
 nvtsteps=int(sys.argv[5])
-pres=sys.argv[3]
+pres=int(sys.argv[3])
 simulation.step(nvtsteps)
 system.addForce(MonteCarloBarostat(pres*bar, temp*kelvin))
 simulation.context.reinitialize(preserveState=True)
