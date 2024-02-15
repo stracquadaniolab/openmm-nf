@@ -19,7 +19,7 @@ process openmm {
     
 shell:
     """
-        openmm.py $inpdb $temp $pres $solvmol $nptrun $nvtrun $reprate  traj.pdb md_log.txt
+        openmm-runner.py $inpdb $temp $pres $solvmol $nptrun $nvtrun $reprate  traj.pdb md_log.txt
     """
 
 }
