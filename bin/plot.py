@@ -8,7 +8,8 @@ step = data[:,0]
 potential_energy = data[:,1]
 temperature = data[:,2]
 volume = data[:,3]
-clipped_step = (data[:,0] > sys.argv[2])
+skipsteps = int(sys.argv[2])
+clipped_step = (data[:,0] > skipsteps)
 clipped_data = data[clipped_step]
 
 clipped_pe = np.array(clipped_data[0:,1])
