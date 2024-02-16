@@ -1,6 +1,6 @@
 # openmm-nf
 
-![](https://img.shields.io/badge/current_version-0.1.8-blue)
+![](https://img.shields.io/badge/current_version-0.1.9-blue)
 ![](https://github.com/stracquadaniolab/openmm-nf/workflows/build/badge.svg)
 ## Overview
 A simple workflow to evaluate protein stability with respect to the wildtype
