@@ -37,13 +37,13 @@ process hydro_plot {
 
 workflow {
     inpath_ch = channel.fromPath("${params.inputFile}")
-    temp = Channel.value(300)
-    pres = Channel.value(1)
-    solvmol = Channel.value(1000)
-    nvtrun = Channel.value(1000)
-    nptrun = Channel.value(1000)
-    reprate = Channel.value(100)
-    skipsteps = Channel.value(100)
+    temp = Channel.value(${params.temp})
+    pres = Channel.value(${params.pres})
+    solvmol = Channel.value(${params.solvmol})
+    nvtrun = Channel.value(${params.nvtrun})
+    nptrun = Channel.value(${params.nptrun})
+    reprate = Channel.value(${params.reprate})
+    skipsteps = Channel.value(${params.skipsteps})
     openmm(inpath_ch, temp, pres, solvmol, nvtrun, nptrun, reprate)
     hydro_plot(openmm.out.md_log, skipsteps)
 }
