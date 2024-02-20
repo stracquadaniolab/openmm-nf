@@ -4,8 +4,17 @@ from openmm import *
 from openmm.unit import *
 import sys
 from sys import stdout
+from pdbfixer import PDBFixer
 
-pdb = PDBFile(sys.argv[1])
+#pdb = PDBFile(sys.argv[1])
+pdb = PDBFixer(sys.argv[1])
+pdb.findMissingResidues()
+pdb.findNonstandardResidues()
+pdb.replaceNonstandardResidues()
+pdb.removeHeterogens(True)
+pdb.findMissingAtoms()
+pdb.addMissingAtoms()
+pdb.addMissingHydrogens(7.0)
 forcefield = ForceField('amber14-all.xml', 'amber14/tip3pfb.xml')
 modeller = Modeller(pdb.topology, pdb.positions)
 #modeller.deleteWater()
