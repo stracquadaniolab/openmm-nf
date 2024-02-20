@@ -8,7 +8,7 @@ from pdbfixer import PDBFixer
 
 #pdb = PDBFile(sys.argv[1])
 pdb = PDBFixer(sys.argv[1])
-#pdb.applyMutations(mutationChain='A', mutationResidues='19', newResidues='ALA')
+pdb.applyMutations(["SER-19-ALA"], "A")
 pdb.findMissingResidues()
 pdb.findNonstandardResidues()
 pdb.replaceNonstandardResidues()
