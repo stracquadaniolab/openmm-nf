@@ -16,11 +16,11 @@ process pdbfixer-mutants {
 
 process openmm-minimise {
     input:
-       path fixed_pdbs
+        path fixed_pdbs
     output: 
-       path '*_unfolded.pdb', emit: unfolded_pdbs
-       path '*_folded.pdb', emit: folded_pdbs
-       path 'data.csv', emit: data
+        path '*_unfolded.pdb', emit: unfolded_pdbs
+        path '*_folded.pdb', emit: folded_pdbs
+        path 'data.csv', emit: data
     shell:
     """
     openmm-minimise.py --i $fixed_pdbs
