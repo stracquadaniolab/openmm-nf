@@ -14,7 +14,7 @@ process pdbfixer-mutants {
     """
 }
 
-process openmm-minimise {
+process minimise {
     input:
         path fixed_pdbs
     output: 
@@ -45,7 +45,7 @@ workflow {
     inpath_ch = channel.fromPath("${params.inputFile}")
     incsv_ch = channel.fromPath("${params.inputCsv}")
     pdbfixer-mutants(inpath_ch, incsv_ch)
-    openmm-minimise(pdbfixer-mutants.out.fixed_pdbs)
+    minimise(pdbfixer-mutants.out.fixed_pdbs)
     output_data(pdbfixer-mutants.out.csv_reformat, openmm-minimise.out.data)
 }
 
