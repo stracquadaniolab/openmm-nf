@@ -24,13 +24,23 @@ from pdbfixer import PDBFixer
 def get_data(csvname: str, col: str):
     data = pd.read_csv(csvname)
     clipped_data=pd.DataFrame(data=data, columns=[col])
-    divided_data = clipped_data.Mutation.str.extract(r'([a-zA-Z]+)([^a-zA-Z]+)([a-zA-Z]+)')
+    divided_data = clipped_data[col].str.extract(r'([a-zA-Z]+)([^a-zA-Z]+)([a-zA-Z]+)')
     divided_cleaned = divided_data.to_string(header=None, index=False)
     amino_index = {'G': 'GLY' , 'L': 'LEU', 'R': 'ARG', 'A': 'ALA', 'Y': 'TYR', 'S': 'SER', 'M': 'MET', 'I': 'ILE', 'T': 'THR', 'C': 'CYS', 'V': 'VAL', 'P': 'PRO', 'F': 'PHE', 'W': 'TRP', 'H': 'HIS', 'K': 'LYS', 'D': 'ASP', 'E': 'GLU', 'N': 'ASN', 'Q': 'GLN', ' ': '-'}
     new_rep_codes = re.sub(r"[GLRAYSMITCVPFWHKDENQ ]", lambda x: amino_index[x.group(0)], divided_cleaned)
     new_rep_cleaned = re.sub("--","-", new_rep_codes)
     return new_rep_cleaned
 
+def reformat_data(csvname: str, new_rep_cleaned):
+    df_newcol = new_rep_cleaned.splitlines()
+    pre_df = {'name': df_newcol}
+    df1 = pd.DataFrame(pre_df)
+    df2 = pd.read_csv(csvname)
+    df3 = pd.concat([df1, df2['ΔΔG']], axis=1)
+    stem = csvname.replace(".csv","")
+    csv_reformat = str(stem + "_reformat.csv")
+    df3.to_csv(csv_reformat)
+    
 
 def clean_wildtype(pdbname: str, pH: str):
     pH_fl = float(pH)
