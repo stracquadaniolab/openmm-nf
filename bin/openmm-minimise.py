@@ -1,9 +1,9 @@
 #!/usr/bin/env python3#!/usr/bin/env python3
-"""openmm-minimise-simultaneous
+"""openmm-minimise
 
 Minimise the potential energy of the wildtype protein structure and mutated variants, according to AMBER14 potentials 
 Usage:
-openmm-minimise-simultaneous.py [--i=<pdb>] [--no-restraints] 
+openmm-minimise.py [--i=<pdb>] [--no-restraints] 
 
 Options:
 --i=<pdb>          Input the fixed PDB files from the Mutant Maker process
