@@ -20,7 +20,7 @@ process OpenmmMinimise {
     publishDir "${params.resultsDir}/openmm-minimise/", pattern: "*folded.pdb", mode: 'copy'
     publishDir "${params.resultsDir}/openmm-minimise/", pattern: "data.csv", mode: 'copy'
     input:
-        path "*_fixed.pdb"
+        path fixed_pdbs
     output: 
         path '*_unfolded.pdb', emit: unfolded_pdbs
         path '*_folded.pdb', emit: folded_pdbs
@@ -51,7 +51,8 @@ workflow {
     inpath_ch = channel.fromPath("${params.inputFile}")
     incsv_ch = channel.fromPath("${params.inputCsv}")
     PdbfixerMutants(incsv_ch, inpath_ch)
-    OpenmmMinimise
+    fixed_pdb_ch = channel.fromPath("*_fixed.pdb")
+    OpenmmMinimise(fixed_pdb_ch)
     OutputData(PdbfixerMutants.out.csv_reformat, OpenmmMinimise.out.data)
 }
 
