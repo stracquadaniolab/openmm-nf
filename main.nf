@@ -50,7 +50,7 @@ process OutputData {
 workflow {
     inpath_ch = channel.fromPath("${params.inputFile}")
     incsv_ch = channel.fromPath("${params.inputCsv}")
-    PdbfixerMutants(incsv_ch, inpath_ch).flatten()
+    PdbfixerMutants(incsv_ch, inpath_ch)
     OpenmmMinimise(PdbfixerMutants.out.fixed_pdbs)
     OutputData(PdbfixerMutants.out.csv_reformat, OpenmmMinimise.out.data)
 }
