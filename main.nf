@@ -8,7 +8,7 @@ process PdbfixerMutants {
         path incsv
         path inpdb
     output:
-        path '*_fixed.pdb', emit: fixed_pdbs
+        tuple path '*_fixed.pdb', emit: fixed_pdbs
         path '*_reformat.csv', emit: csv_reformat
     shell:
     """
@@ -20,10 +20,10 @@ process OpenmmMinimise {
     publishDir "${params.resultsDir}/openmm-minimise/", pattern: "*folded.pdb", mode: 'copy'
     publishDir "${params.resultsDir}/openmm-minimise/", pattern: "data.csv", mode: 'copy'
     input:
-        path fixed_pdbs
+        tuple path fixed_pdbs
     output: 
-        path '*_unfolded.pdb', emit: unfolded_pdbs
-        path '*_folded.pdb', emit: folded_pdbs
+        tuple path '*_unfolded.pdb', emit: unfolded_pdbs
+        tuple path '*_folded.pdb', emit: folded_pdbs
         path 'data.csv', emit: data
     shell:
     """
