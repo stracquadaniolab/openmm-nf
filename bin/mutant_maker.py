@@ -67,7 +67,7 @@ def create_mutants(pdbname: str, new_rep_cleaned, chain: str, pH: str):
         mutpdb.findMissingAtoms()
         mutpdb.addMissingAtoms()
         mutpdb.addMissingHydrogens(pH_fl)
-        PDBFile.writeFile(pdb.topology, pdb.positions, open(mutant + "_fixed.pdb", 'w'))
+        PDBFile.writeFile(mutpdb.topology, mutpdb.positions, open(mutant + "_fixed.pdb", 'w'))
 
 
 def main():

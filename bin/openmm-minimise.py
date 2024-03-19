@@ -56,7 +56,7 @@ def main():
     pdbunfolded = str(stem + "_unfolded.pdb")
     pdbfolded = str(stem + "_folded.pdb")
     delta_g_list = []
-    for j in range(1,75):
+    for j in range(1,81):
         simulation = setup_simulation(pdb, system)
         simulation = setup_simulation(pdb, system)
         init_state = simulation.context.getState(getEnergy=True, getPositions=True)
@@ -85,7 +85,7 @@ def main():
             delta_G = init_pe - final_pe
             logging.info("Minimised potential energy = %.9f kcal/mol"
                 % final_state.getPotentialEnergy().value_in_unit(kilocalories_per_mole))
-            if 3 <= delta_G:
+            if 1.3 <= delta_G:
                 delta_g_list.append(delta_G)
             logging.info("Folding free energy  = %.9f kcal/mol"
                 % delta_G)
