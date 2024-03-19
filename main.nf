@@ -1,7 +1,7 @@
 // enabling nextflow DSL v2
 nextflow.enable.dsl=2
 
-process pdbfixer-mutants {
+process PdbfixerMutants {
     input:
         path incsv
         path inpdb
@@ -14,7 +14,7 @@ process pdbfixer-mutants {
     """
 }
 
-process minimise {
+process OpenmmMinimise {
     input:
         path fixed_pdbs
     output: 
@@ -27,7 +27,7 @@ process minimise {
     """
 }
 
-process output_data {
+process OutputData {
     input:
         path benchcsv
         path testcsv
@@ -44,8 +44,8 @@ process output_data {
 workflow {
     inpath_ch = channel.fromPath("${params.inputFile}")
     incsv_ch = channel.fromPath("${params.inputCsv}")
-    pdbfixer-mutants(inpath_ch, incsv_ch)
-    minimise(pdbfixer-mutants.out.fixed_pdbs)
-    output_data(pdbfixer-mutants.out.csv_reformat, openmm-minimise.out.data)
+    PdbfixerMutants(inpath_ch, incsv_ch)
+    OpenmmMinimiseminimise(PdbfixerMutants.out.fixed_pdbs)
+    OutputData(PdbfixerMutants.out.csv_reformat, OpenmmMinimise.out.data)
 }
 
