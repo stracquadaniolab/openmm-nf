@@ -73,6 +73,7 @@ def create_mutants(pdbname: str, new_rep_cleaned, chain: str, pH: str):
 def main():
     arguments = docopt(__doc__, version='mutant_maker.py')
     new_rep_cleaned = get_data(arguments['--incsv'], arguments['--from-col'])
+    reformat_data(arguments['--incsv'], new_rep_cleaned)
     clean_wildtype(arguments['--in-pdb'], arguments['--pH'])
     create_mutants(arguments['--in-pdb'], new_rep_cleaned, arguments['--chain'], arguments['--pH'])
 

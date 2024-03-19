@@ -17,7 +17,7 @@ from sys import stdout
 
 def get_energy(test_csv: str):
     df2 = pd.read_csv(test_csv)
-    df3 = df2.loc[df['name'] == 'wildtype']
+    df3 = df2.loc[df2['name'] == 'wildtype']
     wt_min = df3.iloc[0]['min']
     wt_low3 = df3.iloc[0]['lowest3']
     wt_low5 = df3.iloc[0]['lowest5']
