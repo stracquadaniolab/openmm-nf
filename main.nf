@@ -51,7 +51,7 @@ workflow {
     inpath_ch = channel.fromPath("${params.inputFile}")
     incsv_ch = channel.fromPath("${params.inputCsv}")
     PdbfixerMutants(incsv_ch, inpath_ch)
-    OpenmmMinimise()
+    OpenmmMinimise
     OutputData(PdbfixerMutants.out.csv_reformat, OpenmmMinimise.out.data)
 }
 
