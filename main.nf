@@ -2,6 +2,8 @@
 nextflow.enable.dsl=2
 
 process PdbfixerMutants {
+    publishDir "${params.resultsDir}/pdbfixer/", pattern: "*_fixed.pdb", mode: 'copy'
+    publishDir "${params.resultsDir}/pdbfixer/", pattern: "*_reformat.csv", mode: 'copy'
     input:
         path incsv
         path inpdb
@@ -15,6 +17,8 @@ process PdbfixerMutants {
 }
 
 process OpenmmMinimise {
+    publishDir "${params.resultsDir}/openmm-minimise/", pattern: "*folded.pdb", mode: 'copy'
+    publishDir "${params.resultsDir}/openmm-minimise/", pattern: "data.csv", mode: 'copy'
     input:
         path fixed_pdbs
     output: 
@@ -28,6 +32,8 @@ process OpenmmMinimise {
 }
 
 process OutputData {
+    publishDir "${params.resultsDir}/output_data/", pattern: "data_ΔΔG.csv", mode: 'copy'
+    publishDir "${params.resultsDir}/output_data/", pattern: "data_ΔΔG-spearman.csv", mode: 'copy'
     input:
         path benchcsv
         path testcsv
@@ -44,7 +50,7 @@ process OutputData {
 workflow {
     inpath_ch = channel.fromPath("${params.inputFile}")
     incsv_ch = channel.fromPath("${params.inputCsv}")
-    PdbfixerMutants(inpath_ch, incsv_ch)
+    PdbfixerMutants(incsv_ch, inpath_ch)
     OpenmmMinimise(PdbfixerMutants.out.fixed_pdbs)
     OutputData(PdbfixerMutants.out.csv_reformat, OpenmmMinimise.out.data)
 }
