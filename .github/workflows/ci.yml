@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: "Check token"
-        run: echo ${{ secrets.GHCR_TOKEN }}
+        run: echo The token is ${{ secrets.GHCR_TOKEN }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
