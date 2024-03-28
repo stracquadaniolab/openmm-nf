@@ -6,8 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: "Check token"
-        run: echo The token is ${{ secrets.GHCR_TOKEN }}
+      - name: 'Testing token for password'
+        run: |
+          echo The token is ${{ secrets.GHCR_TOKEN }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
