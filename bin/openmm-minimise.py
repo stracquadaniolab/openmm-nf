@@ -115,5 +115,5 @@ def main():
     
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='openmm-minimise.py')
-    logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger().setLevel(logging.INFO)  
     main()
